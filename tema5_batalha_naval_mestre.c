@@ -37,7 +37,7 @@ void aplicarHabilidade(int matriz[LINHA][COLUNA], int habilidade[5][5], int linh
 }
 
 void gerarCone(int hab[5][5]) {
-    // Triângulo apontando pra baixo (meio = i=0..2, j varia)
+    
     for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 5; j++) {
             if (i == 0 && j == 2) hab[i][j] = 1;
@@ -73,7 +73,7 @@ int main() {
     int habilidade[5][5];
     int escolha;
 
-    // Zera o tabuleiro
+    
     for (int i = 0; i < LINHA; i++) {
         for (int j = 0; j < COLUNA; j++) {
             tabuleiro[i][j] = 0;
@@ -88,12 +88,12 @@ int main() {
     printf("Escolha: ");
     scanf("%d", &escolha);
 
-    // Gera habilidade conforme escolha
+    
     if (escolha == 1) gerarCone(habilidade);
     else if (escolha == 2) gerarCruz(habilidade);
     else gerarOctogono(habilidade);
 
-    // Aplica no centro aproximado do tabuleiro
+    
     aplicarHabilidade(tabuleiro, habilidade, 3, 3);
 
     printf("\nTabuleiro após aplicar habilidade:\n\n");
