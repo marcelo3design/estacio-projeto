@@ -85,6 +85,7 @@ int main() {
 
     printf("--- TABULEIRO FINAL COM TODAS AS HABILIDADES ---\n\n");
     imprimirTabuleiro(tabuleiro);
-
+     
+    
     return 0;
 }
