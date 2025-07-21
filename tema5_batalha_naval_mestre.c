@@ -21,7 +21,7 @@ void imprimirTabuleiro(int matriz[LINHA][COLUNA]) {
     }
 }
 
-void aplicarHabilidade(int matriz[LINHA][COLUNA], int habilidade[5][5], int linha, int coluna) {
+void aplicarHabilidade(int matriz[LINHA][COLUNA], int habilidade[5][5], int linha, int coluna, int valor) {
     for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 5; j++) {
             int x = linha + i;
@@ -29,7 +29,7 @@ void aplicarHabilidade(int matriz[LINHA][COLUNA], int habilidade[5][5], int linh
 
             if (x >= 0 && x < LINHA && y >= 0 && y < COLUNA) {
                 if (habilidade[i][j] == 1) {
-                    matriz[x][y] = 5;
+                    matriz[x][y] = valor;
                 }
             }
         }
@@ -37,7 +37,6 @@ void aplicarHabilidade(int matriz[LINHA][COLUNA], int habilidade[5][5], int linh
 }
 
 void gerarCone(int hab[5][5]) {
-    
     for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 5; j++) {
             if (i == 0 && j == 2) hab[i][j] = 1;
@@ -69,34 +68,22 @@ void gerarOctogono(int hab[5][5]) {
 }
 
 int main() {
-    int tabuleiro[LINHA][COLUNA];
-    int habilidade[5][5];
-    int escolha;
+    int tabuleiro[LINHA][COLUNA] = {0};
 
-    
-    for (int i = 0; i < LINHA; i++) {
-        for (int j = 0; j < COLUNA; j++) {
-            tabuleiro[i][j] = 0;
-        }
-    }
+    int cone[5][5];
+    int cruz[5][5];
+    int oct[5][5];
 
-    printf("--- BATALHA NAVAL COM HABILIDADES ---\n");
-    printf("Escolha uma habilidade para aplicar:\n");
-    printf("1 - Cone\n");
-    printf("2 - Cruz\n");
-    printf("3 - Octógono\n");
-    printf("Escolha: ");
-    scanf("%d", &escolha);
+    gerarCone(cone);
+    gerarCruz(cruz);
+    gerarOctogono(oct);
 
-    
-    if (escolha == 1) gerarCone(habilidade);
-    else if (escolha == 2) gerarCruz(habilidade);
-    else gerarOctogono(habilidade);
+    // Aplica cada habilidade em posição diferente
+    aplicarHabilidade(tabuleiro, cone, 0, 0, 1);      // canto superior esquerdo
+    aplicarHabilidade(tabuleiro, cruz, 2, 4, 2);      // meio superior-direito
+    aplicarHabilidade(tabuleiro, oct, 5, 2, 3);       // meio inferior
 
-    
-    aplicarHabilidade(tabuleiro, habilidade, 3, 3);
-
-    printf("\nTabuleiro após aplicar habilidade:\n\n");
+    printf("--- TABULEIRO FINAL COM TODAS AS HABILIDADES ---\n\n");
     imprimirTabuleiro(tabuleiro);
 
     return 0;
